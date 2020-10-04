@@ -1,0 +1,9 @@
+.hero-error {
+  &-container {
+    margin: 25%; border: 2px solid #ccc; background-color: #673ab7; color: #fff; width: 50%; padding: 20px;
+
+    &--message {
+      font-size: 1em;;
+    }
+  }
+}

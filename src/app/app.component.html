@@ -1,0 +1,19 @@
+<div role="navigation">
+  <mat-toolbar color="primary">
+    <a mat-icon-button *ngIf="isHome()" routerLink='/'>
+        <mat-icon>home</mat-icon>
+    </a>
+
+    <a *ngIf="!isHome()" mat-flat-button color="primary" routerLink='/heroes'>
+      <mat-icon>keyboard_backspace</mat-icon>
+    </a>
+
+    F1 Champions
+  </mat-toolbar>
+</div>
+<div class="app-component--container">
+  <div role="contentinfo">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

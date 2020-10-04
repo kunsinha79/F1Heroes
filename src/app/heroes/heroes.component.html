@@ -1,0 +1,58 @@
+
+  <h1 class="heroes-heading">F1 World Champions 2005-2015</h1>
+  <div *ngIf="!isLoading else spinner" class="heroes-container">
+    <div class="heroes-container--error" *ngIf="isError">
+      <app-heroes-error></app-heroes-error>
+    </div>
+    <mat-card *ngFor='let hero of heroes;' class="heroes-card">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <mat-icon> emoji_events </mat-icon>
+        </div>
+        <mat-card-title>{{hero.season}}</mat-card-title>
+
+      </mat-card-header>
+      <mat-card-content class="heroes-card-content">
+        <div class="heroes-card-content--flag">
+          <img class="heroes-card-content--flag--img" src="../assets/flags/{{hero.DriverStandings[0].Driver.nationality}}.png" alt='{{hero.DriverStandings[0].Driver.nationality}}'>
+        </div>
+
+        <div class="heroes-card-content--name">
+            {{hero.DriverStandings[0].Driver.givenName}}  {{hero.DriverStandings[0].Driver.familyName}}
+        </div>
+
+        <div class="heroes-card-content--dob">
+          <span class="heroes-card-content--dob--label">Date of Birth</span>
+          <span>{{hero.DriverStandings[0].Driver.dateOfBirth | date}}</span>
+        </div>
+
+        <div class="heroes-card-content--constructor">
+          <span class="heroes-card-content--constructor--label">Constructor</span>
+          <img class="heroes-card-content--constructor--img" src="../assets/constructors/{{hero.DriverStandings[0].Constructors[0].constructorId}}.png" alt='{{hero.DriverStandings[0].Constructors[0].name}}'>
+          <span class="heroes-card-content--constructor--label"> ({{hero.DriverStandings[0].Constructors[0].name}})</span>
+        </div>
+
+        <div class="heroes-card-content--data">
+          <mat-chip-list>
+            <mat-chip color="accent" selected>
+              {{hero.DriverStandings[0].points}} Pts.
+            </mat-chip>
+            <mat-chip color="accent" selected>
+              {{hero.DriverStandings[0].wins}} Wins
+            </mat-chip>
+          </mat-chip-list>
+
+        </div>
+      </mat-card-content>
+      <mat-card-actions style="text-align: right">
+        <a mat-raised-button color="primary" routerLink="/seasonHeroes/{{ hero.season }}/hero/{{ hero.DriverStandings[0].Driver.permanentNumber }}">
+          View all winners
+        </a>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+  <ng-template #spinner>
+      <mat-spinner></mat-spinner>
+  </ng-template>
+

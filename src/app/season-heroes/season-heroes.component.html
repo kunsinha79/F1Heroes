@@ -1,0 +1,59 @@
+
+<h1 class="seasons-heading">Season Champions - {{year}}</h1>
+<div *ngIf="!isLoading else spinner" class="seasons-container">
+  <div class="seasons-container--error" *ngIf="isError">
+    <app-heroes-error></app-heroes-error>
+  </div>
+  <mat-card *ngFor='let race of races;' class="seasons-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon> flag </mat-icon>
+      </div>
+      <mat-card-title>{{race.raceName}}</mat-card-title>
+      <mat-card-subtitle> {{race.Circuit.circuitName}}, {{race.Circuit.Location.locality}}, {{race.Circuit.Location.country}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="seasons-card-content">
+      <div class="seasons-card-content--flag">
+        <img
+          src="../assets/flags/{{race.QualifyingResults[0].Driver.nationality}}.png"
+          alt='{{race.QualifyingResults[0].Driver.nationality}}'
+        >
+      </div>
+
+      <div class="seasons-card-content--name">
+          {{race.QualifyingResults[0].Driver.givenName}}  {{race.QualifyingResults[0].Driver.familyName}}
+          <span class="seasons-card-content--name-champ" *ngIf="isChampion(race.QualifyingResults[0].Driver.permanentNumber)">
+            <mat-icon> emoji_events </mat-icon>
+          </span>
+      </div>
+
+      <div class="seasons-card-content--constructor">
+        <img
+          src="../assets/constructors/{{race.QualifyingResults[0].Constructor.constructorId}}.png"
+          alt='{{race.QualifyingResults[0].Constructor.name}}'
+        >
+        <span> ({{race.QualifyingResults[0].Constructor.name}})</span>
+      </div>
+
+      <div class="seasons-card-content--data">
+        <mat-chip-list>
+          <mat-chip color="accent" selected>
+            Q1 {{race.QualifyingResults[0].Q1}}
+          </mat-chip>
+          <mat-chip color="accent" selected>
+            Q2 {{race.QualifyingResults[0].Q2}}
+          </mat-chip>
+          <mat-chip color="accent" selected>
+            Q3 {{race.QualifyingResults[0].Q3}}
+          </mat-chip>
+        </mat-chip-list>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
